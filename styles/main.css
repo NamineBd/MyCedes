@@ -12,6 +12,13 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: #000;
+    color: #fff;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
 /* Styles de l'en-tête */
@@ -25,12 +32,20 @@ body {
     position: fixed;
     width: 100%;
     z-index: 1000;
-    height: 60px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
 }
 
 .language-selector {
     cursor: pointer;
     font-size: 14px;
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
 }
 
 .language-option {
@@ -39,12 +54,22 @@ body {
     transition: opacity 0.3s;
 }
 
+.language-option.current {
+    opacity: 0.7;
+}
+
 .language-option.selected {
     opacity: 1;
 }
 
 .language-separator {
     color: #555;
+    margin: 0 2px;
+}
+
+.provider-privacy {
+    font-size: 14px;
+    opacity: 0.7;
 }
 
 .logo {
@@ -56,12 +81,13 @@ body {
 }
 
 .logo img {
-    height: 50px;
+    height: 30px;
 }
 
 .header-actions {
     display: flex;
     gap: 20px;
+    align-items: center;
 }
 
 .action-button {
@@ -72,10 +98,148 @@ body {
     font-size: 14px;
     opacity: 0.7;
     transition: opacity 0.3s;
+    display: flex;
+    align-items: center;
 }
 
 .action-button:hover {
     opacity: 1;
+}
+
+.search-icon, .dropdown-icon {
+    margin-left: 5px;
+    font-size: 10px;
+}
+
+/* Styles pour la barre de navigation */
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 15px;
+    background: rgba(30, 30, 30, 0.8);
+    color: white;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    transform: translateY(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+.navbar a {
+    opacity: 0.8;
+    transition: opacity 0.3s;
+    font-size: 14px;
+    text-transform: none;
+    padding: 5px 0;
+}
+
+.navbar a:hover {
+    opacity: 1;
+}
+
+.navbar.hidden {
+    transform: translateY(-100%);
+}
+
+/* Styles pour la section héro avec vidéo */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 10%;
+}
+
+.video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+#hero-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-content {
+    max-width: 600px;
+    z-index: 1;
+    margin-top: 60px;
+}
+
+.hero-title {
+    font-size: 48px;
+    font-weight: 300;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.hero-subtitle {
+    font-size: 18px;
+    margin-bottom: 30px;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 24px;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    border-radius: 25px;
+}
+
+.cta-button:hover {
+    background-color: #e6e6e6;
+}
+
+.arrow-icon {
+    margin-left: 10px;
+}
+
+.scroll-indicator {
+    position: absolute;
+    right: 30px;
+    bottom: 0;
+    height: 100%;
+    width: 2px;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.scroll-indicator::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background-color: #fff;
 }
 
 /* Styles pour les modales */
@@ -149,7 +313,32 @@ input[type="password"] {
     background-color: #333;
 }
 
-/* Espace pour accueillir le header fixe */
-main {
-    padding-top: 60px;
+/* Media queries pour la responsivité */
+@media (max-width: 768px) {
+    .main-header {
+        padding: 15px;
+    }
+    
+    .provider-privacy {
+        display: none;
+    }
+    
+    .navbar {
+        gap: 15px;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding: 15px 10px;
+    }
+    
+    .navbar a {
+        white-space: nowrap;
+    }
+    
+    .hero-content {
+        padding: 0 20px;
+    }
+    
+    .hero-title {
+        font-size: 36px;
+    }
 }

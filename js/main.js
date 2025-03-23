@@ -13,9 +13,66 @@ function closeModal(id) {
     document.body.style.overflow = "auto";
 }
 
-// Fermer les modales en cliquant à l'extérieur du contenu
+// Variables pour la gestion du scroll
+let lastScrollY = window.scrollY;
+const navbar = document.getElementById("navbar");
+const header = document.querySelector(".main-header");
+
+// Fonction pour gérer l'affichage de la navbar lors du défilement
+function handleScroll() {
+    // Pour la navbar
+    if (window.scrollY < 50 || window.scrollY < lastScrollY) {
+        // Si on est en haut ou on remonte => afficher la barre
+        navbar.classList.remove("hidden");
+    } else {
+        // Si on descend => cacher la barre
+        navbar.classList.add("hidden");
+    }
+    
+    // Pour le header
+    if (window.scrollY > lastScrollY && window.scrollY > 100) {
+        // Défilement vers le bas
+        header.style.transform = "translateY(-100%)";
+    } else {
+        // Défilement vers le haut
+        header.style.transform = "translateY(0)";
+    }
+    
+    // Mise à jour de la position de l'indicateur de défilement
+    updateScrollIndicator();
+    
+    lastScrollY = window.scrollY;
+}
+
+// Fonction pour mettre à jour l'indicateur de défilement
+function updateScrollIndicator() {
+    const scrollIndicator = document.querySelector('.scroll-indicator::after');
+    if (scrollIndicator) {
+        const scrollPercentage = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+        scrollIndicator.style.height = `${scrollPercentage}%`;
+    }
+}
+
+// Initialisation au chargement de la page
 document.addEventListener("DOMContentLoaded", function() {
-    // Sélectionner toutes les modales
+    // Affichage initial de la navbar
+    navbar.classList.remove("hidden");
+    
+    // S'assurer que la vidéo de l'héro joue automatiquement
+    const heroVideo = document.getElementById('hero-video');
+    if (heroVideo) {
+        heroVideo.play().catch(error => {
+            console.log("La lecture automatique de la vidéo a été empêchée:", error);
+            // Fallback: ajouter un bouton pour lire la vidéo manuellement
+            const playButton = document.createElement('button');
+            playButton.textContent = "Lecture";
+            playButton.className = "video-play-button";
+            playButton.addEventListener('click', () => heroVideo.play());
+            document.querySelector('.video-container').appendChild(playButton);
+        });
+    }
+    
+    // Fermer les modales en cliquant à l'extérieur du contenu
     const modals = document.querySelectorAll(".modal");
     
     modals.forEach(modal => {
@@ -34,7 +91,10 @@ document.addEventListener("DOMContentLoaded", function() {
     languageOptions.forEach(option => {
         option.addEventListener("click", function() {
             // Retirer la classe 'selected' de toutes les options
-            languageOptions.forEach(opt => opt.classList.remove("selected"));
+            languageOptions.forEach(opt => {
+                opt.classList.remove("selected");
+                opt.classList.remove("current");
+            });
             // Ajouter la classe 'selected' à l'option cliquée
             this.classList.add("selected");
             
@@ -44,21 +104,5 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-// Fonction pour masquer le header lors du défilement vers le bas
-// et le montrer lors du défilement vers le haut
-let lastScrollTop = 0;
-
-window.addEventListener("scroll", function() {
-    const header = document.querySelector(".main-header");
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
-    if (scrollTop > lastScrollTop && scrollTop > 100) {
-        // Défilement vers le bas
-        header.style.transform = "translateY(-100%)";
-    } else {
-        // Défilement vers le haut
-        header.style.transform = "translateY(0)";
-    }
-    
-    lastScrollTop = scrollTop;
-});
+// Écouteur d'événement sur le scroll
+window.addEventListener("scroll", handleScroll);

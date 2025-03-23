@@ -9,19 +9,38 @@
 <body>
     <!-- Header -->
     <header class="main-header">
-        <div class="language-selector">
-            <span class="language-option">Deutsch</span>
-            <span class="language-separator">|</span>
-            <span class="language-option selected">English</span>
+        <div class="header-left">
+            <div class="language-selector">
+                <span class="language-option selected">Deutsch</span>
+                <span class="language-separator">|</span>
+                <span class="language-option current">English</span>
+            </div>
+            <div class="provider-privacy">
+                <span>Provider/Privacy</span>
+            </div>
         </div>
         <div class="logo">
             <img src="img/logo.jpg" alt="Mercedes-Benz Logo">
         </div>
         <div class="header-actions">
-            <button class="action-button" onclick="openModal('searchModal')">Search</button>
-            <button class="action-button" onclick="openModal('loginModal')">Login</button>
+            <button class="action-button" onclick="openModal('searchModal')">
+                Search <span class="search-icon">⚪</span>
+            </button>
+            <button class="action-button" onclick="openModal('loginModal')">
+                Login <span class="dropdown-icon">▼</span>
+            </button>
         </div>
     </header>
+
+    <!-- Barre de navigation -->
+    <div class="navbar" id="navbar">
+        <a href="#">Vehicles</a>
+        <a href="#">Art & Culture</a>
+        <a href="#">Sustainability</a>
+        <a href="#">Design</a>
+        <a href="#">Innovation</a>
+        <a href="#">Exclusive</a>
+    </div>
 
     <!-- Modal pour la recherche -->
     <div id="searchModal" class="modal">
@@ -48,16 +67,26 @@
         </div>
     </div>
 
-    <!-- Navigation (à compléter) -->
-    <nav class="main-nav">
-        <!-- Contenu de la navigation à venir -->
-    </nav>
-
-    <!-- Contenu principal (à compléter) -->
+    <!-- Contenu principal -->
     <main>
-        <section class="section-1">
-            <!-- Première section à venir -->
+        <section class="hero-section">
+            <div class="video-container">
+                <video autoplay muted loop id="hero-video">
+                    <source src="loop.mp4" type="video/mp4">
+                </video>
+                <div class="overlay"></div>
+            </div>
+            <div class="hero-content">
+                <h1 class="hero-title">CLASS OF ITS OWN.</h1>
+                <p class="hero-subtitle">The all-new Mercedes-Benz CLA.</p>
+                <a href="#" class="cta-button">
+                    Discover more
+                    <span class="arrow-icon">→</span>
+                </a>
+            </div>
+            <div class="scroll-indicator"></div>
         </section>
+
         <section class="section-2">
             <!-- Deuxième section à venir -->
         </section>
