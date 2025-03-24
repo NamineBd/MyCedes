@@ -33,6 +33,7 @@ a {
     width: 100%;
     z-index: 1000;
     transition: transform 0.3s ease-in-out;
+    height: 70px;
 }
 
 .header-left {
@@ -81,7 +82,7 @@ a {
 }
 
 .logo img {
-    height: 30px;
+    height: 50px;
 }
 
 .header-actions {
@@ -312,6 +313,178 @@ input[type="password"] {
 .search-button:hover, .login-button:hover {
     background-color: #333;
 }
+/*premiere section====================================*/
+/* Dans votre main.css */
+.mercedes-banner {
+    width: 100%;
+    height: 100vh;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    padding: 0 10%;
+    color: #fff;
+    position: relative;
+  }
+  
+  .mercedes-content {
+    max-width: 600px;
+  }
+  
+  .mercedes-content h2 {
+    font-size: 42px;
+    margin-bottom: 20px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  
+  .mercedes-content p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    transition-delay: 0.2s;
+  }
+  
+  .learn-more-btn {
+    display: inline-flex;
+    align-items: center;
+    background-color: #fff;
+    color: #000;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease, background-color 0.3s ease;
+    transition-delay: 0.4s;
+  }
+  
+  .learn-more-btn:hover {
+    background-color: #e5e5e5;
+  }
+  
+  .arrow-icon {
+    margin-left: 8px;
+    font-size: 18px;
+  }
+  
+  /* Classes pour l'animation */
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  /* Mercedes Showcase Section */
+.mercedes-showcase {
+    padding: 60px 0;
+    background-color: #fff;
+}
+
+.showcase-item {
+    margin-bottom: 100px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.showcase-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.showcase-category {
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.showcase-content {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.showcase-content.reversed {
+    flex-direction: row-reverse;
+}
+
+.showcase-text {
+    flex: 1;
+    padding: 20px;
+}
+
+.showcase-title {
+    font-size: 36px;
+    font-weight: 300;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.showcase-description {
+    font-size: 20px;
+    margin-bottom: 20px;
+    line-height: 1.4;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.showcase-image {
+    flex: 1;
+    overflow: hidden;
+}
+
+.showcase-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.6s ease;
+}
+
+.showcase-image img:hover {
+    transform: scale(1.03);
+}
+
+.specs {
+    font-size: 12px;
+    color: #666;
+    margin-top: 20px;
+    max-width: 400px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.showcase-category.visible, .showcase-title.visible, .showcase-description.visible, .specs.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .showcase-content, 
+    .showcase-content.reversed {
+        flex-direction: column;
+    }
+    
+    .showcase-title {
+        font-size: 28px;
+    }
+    
+    .showcase-image {
+        order: -1;
+    }
+}
 
 /* Media queries pour la responsivité */
 @media (max-width: 768px) {
@@ -340,5 +513,12 @@ input[type="password"] {
     
     .hero-title {
         font-size: 36px;
+    }
+    .mercedes-showcase {
+        padding: 40px 20px;
+    }
+    
+    .showcase-item {
+        margin-bottom: 60px;
     }
 }

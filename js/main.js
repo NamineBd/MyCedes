@@ -1,5 +1,28 @@
 // js/main.js
 
+// Fonction pour animer spécifiquement les éléments du showcase
+function animateShowcaseElements() {
+    // Sélectionner les containers principaux
+    const showcaseItems = document.querySelectorAll('.showcase-item');
+    
+    showcaseItems.forEach(item => {
+        if (isElementInViewport(item)) {
+            // Animer le container principal
+            item.classList.add('visible');
+            
+            // Sélectionner tous les éléments à animer à l'intérieur
+            const elementsToAnimate = item.querySelectorAll('.showcase-category, .showcase-title, .showcase-description, .specs, .fade-in');
+            
+            // Animation séquentielle avec délai
+            elementsToAnimate.forEach((el, index) => {
+                setTimeout(() => {
+                    el.classList.add('visible');
+                }, 150 * (index + 1)); // Délai progressif plus court
+            });
+        }
+    });
+}
+
 // Fonctions pour gérer les modales
 function openModal(id) {
     document.getElementById(id).classList.add("active");
@@ -17,6 +40,25 @@ function closeModal(id) {
 let lastScrollY = window.scrollY;
 const navbar = document.getElementById("navbar");
 const header = document.querySelector(".main-header");
+
+// Fonction pour vérifier si un élément est visible dans la fenêtre
+function isElementInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return (
+        rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.8
+    );
+}
+
+// Fonction pour gérer l'animation des éléments
+function handleScrollAnimation() {
+    const fadeElements = document.querySelectorAll('.fade-in');
+    fadeElements.forEach(element => {
+        if (isElementInViewport(element)) {
+            element.classList.add('visible');
+        }
+    });
+    animateShowcaseElements()
+}
 
 // Fonction pour gérer l'affichage de la navbar lors du défilement
 function handleScroll() {
@@ -41,6 +83,9 @@ function handleScroll() {
     // Mise à jour de la position de l'indicateur de défilement
     updateScrollIndicator();
     
+    // Gérer l'animation des éléments au scroll
+    handleScrollAnimation();
+    
     lastScrollY = window.scrollY;
 }
 
@@ -55,6 +100,7 @@ function updateScrollIndicator() {
 
 // Initialisation au chargement de la page
 document.addEventListener("DOMContentLoaded", function() {
+    
     // Affichage initial de la navbar
     navbar.classList.remove("hidden");
     
@@ -102,6 +148,11 @@ document.addEventListener("DOMContentLoaded", function() {
             // Par exemple : changeLanguage(this.textContent);
         });
     });
+    
+    // Exécuter la fonction d'animation au chargement pour animer les éléments déjà visibles
+    handleScrollAnimation();
+    // Précharger l'animation du showcase si des éléments sont déjà visibles
+    animateShowcaseElements();
 });
 
 // Écouteur d'événement sur le scroll
