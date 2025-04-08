@@ -20,7 +20,17 @@ a {
     text-decoration: none;
     color: inherit;
 }
-
+/*.main-footer {
+    background-color: #000;
+    color: #fff;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    position: fixed;
+    width: 100%;
+    transition: transform 0.3s ease-in-out;
+    height: 70px;
+}*/
 /* Styles de l'en-tête */
 .main-header {
     background-color: #000;
